@@ -1,0 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ include file="t-header.jsp"%>
+<%@ page import="com.it.entity.Card"%>
+<%
+	Card cd = (Card) request.getAttribute("card");
+%>
+<div class="panel-body">
+	<form id="signupForm" method="post" class="form-horizontal"
+		action="/cardupdata.jsp" novalidate="novalidate">
+		<input type="hidden" value="<%=cd.getId()%>" name="id" />
+		<div class="form-group">
+			<label class="col-sm-4 control-label" for="code">卡&nbsp;&nbsp;&nbsp;&nbsp;号：</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="code" name="code"
+					placeholder="请输入卡号" value="<%=cd.getCode()%>">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-4 control-label" for="name">用户名：</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="name" name="name"
+					placeholder="请输入用户名" value="<%=cd.getName()%>">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="col-sm-4 control-label" for="tel">电&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;话:</label>
+			<div class="col-sm-5">
+				<input type="text" class="form-control" id="tel" name="tel"
+					placeholder="请输入电话" value="<%=cd.getTel()%>">
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-9 col-sm-offset-4">
+				<button type="submit" class="btn btn-primary" name="signup"
+					value="修改">修改</button>
+			</div>
+		</div>
+	</form>
+</div>
+<script src="/js/jquery.validate.min.js"></script>
+<script>
+	$(function() {
+		$("ul>li:nth-child(2)").addClass("active");
+		$("#signupForm").validate({
+			rules : {
+				code : "required",
+				name : "required",
+				tel : "required"
+			},
+			message : {
+				code : "输入卡号",
+				name : "情输入用户名",
+				tel : "请输入电话"
+			}
+
+		});
+	});
+</script>
+<%@ include file="t-footer.jsp"%>
